@@ -14,28 +14,32 @@
     </style>
   </head>
   <body>
-  <nav class="navbor navbar-expand-sm bg-info text-dark fixed-top">
-    <div class="container-fluid" style="height: 80px;">
-      <ul class="navbar-nav">
-        <li class="nav-item mx-5 my-3">
-          <i class="fa-solid fa-star" style="font-size: 30px;"></i>
-          <h2 class="d-inline">Hello</h2></a>
-        </li>
-        <li class="nav-item mx-3 my-3">
-          <a class="nav-link disabled" href="#"><i class="fa-solid fa-user-tie"></i>관리자</a>
-        </li>
-        <li class="nav-item mx-3 my-3">
-          <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
-        </li>
-        <span class="navbar-text me-3 my-3">홍길동님 환영합니다.</span>
-      </ul>
-    </div>
-  </nav>
+    <nav class="navbor navbar-expand-sm bg-info text-white fixed-top">
+      <div class="container-fluid">
+        <ul class="navbar-nav mx-2">
+          <a href="#">
+            <i class="fa-solid fa-star ms-3 my-3" style="font-size: 30px;"></i>
+            <span style="font-size: 30px;">Hello</span></a>
+          <li class="nav-item ms-5 me-3 my-3">
+            <a class="nav-link" href="#a">태어난 곳</a>
+          </li>
+          <li class="nav-item mx-3 my-3">
+            <a class="nav-link" href="#b">가보고 싶은 곳 / 가봤던 곳</a>
+          </li>
+          <li class="nav-item mx-3 my-3">
+            <a class="nav-link" href="#c">좋아하는 음식</a>
+          </li>
+          <li class="nav-item mx-3 my-3">
+            <a class="nav-link" href="#d">취미</a>
+          </li>
+        </ul>
+      </div>
+    </nav> 
 
   <div class="container" style="margin-top: 70px; font-size: 0.9rem;">
     <div class="row" style="height: 1500px;">
       <div class="col-3">
-        <img src="C:\Workspace\frontend\HW\커비3.jpg" alt="커비3" 
+        <img src="C:\Workspace\frontend\HW\img\커비3.jpg" alt="커비3" 
               class="rounded-circle mt-5" style="width: 65% ; height: 10%">
       
         <div class="mt-5 ms-2">
@@ -49,14 +53,30 @@
         </div>
       </div>
       <!--Main영역: 페이지마다 이 부분만 채워줌 -->   
-      <div class="col-9 mt-5" style="font-size: smaller; background-color: white;">
-        <h3><strong>태어난 곳</strong></h3>
-        <img src="">
-        <p>제가 태어난 곳은 어쩌구 </P>
+      <div class="col-9 mt-5" style="font-size: smaller; background-color: beige;">
+        <div style="text-align: center;">
+          <h5 class="mt-3" id="a">제 이름은 심지수입니다.</h5>
+          <h6>MBTI: ENTJ(지휘관, 통솔자)</h6>
+          <h3 class="mt-5"><strong>태어난 곳</strong></h3>
+          <img src="img/jeonju.jpg" alt="jeonju" class="rounded" width="400" height="400">
+          <img src="img/suwon.jpg" alt="suwon" class="rounded" width="400" height="400">
+          <h6 class="mt-3 mx-3" id="b">제가 태어난 곳은 전주입니다. 전라북도에 위치한 도시이며 음식으로 유명한 지역입니다.<br> 
+            성인이 되고 나서 대학교 진학으로 인해 수원으로 이사를 오게 되었습니다.</h6>
+          <h3 class="my-5"><strong>가보고 싶은 곳 / 가봤던 곳</strong></h3>
+          <h5>가보고 싶은 곳</h5>
+          <img src="img/swiss.jpg" alt="swiss" class="rounded" width="400" height="400">
+          <img src="img/swiss2.jpeg" alt="swiss2" class="rounded" width="400" height="400">
+          <h6 class="mt-3 mx-3">제가 가보고 싶은 곳은 스위스입니다.<br>중부 유럽에 위치한 국가이며 연상되는 이미지로는 알프스 산맥이 있습니다.<br>
+          스위스는 대한민국과 비슷하게 산이 많은 지역입니다. 만년설과 빙하가 있는 산의 자연경관을 보고 싶습니다.</h6>
+          <h5 class="my-5">가봤던 곳</h5>
+          <h6 class="mt-3 mx-3">제가 국내에서 가봤던 곳들은 위에 지도에 색칠한 지역들이며 가장 인상 깊었던 여행 중 하나는
+          </h6>
+          <h3 class="my-5" id="c"><strong>좋아하는 음식</strong></h3>
+          <h5 class="mt-3 mx-3">제가 좋아하는 음식은</h5>
 
-      </div>
         
-      
+
+      </div>      
     </div>
   </div> 
   <nav class="navbar navbar-expand-sm bg-light fixed-bottom">
