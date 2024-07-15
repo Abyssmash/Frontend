@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스케쥴 입력 폼</title>
+<style>
+  form { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;
+        border: 1px solid #ccc; border-radius: 5px; }
+  label { font-weight: bold; margin-bottom: 5px; display: block; }
+  input, select 
+  { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;
+    box-sizing: border-box; font-size: 16px; }
+</style>
+</head>
+<body>
+<form>
+  <label for="scheduleName">일정명:</label>
+  <input type="text" id="scheduleName" name="scheduleName" required>
+  <label for="location">장소:</label>
+  <input type="text" id="location" name="location">
+  <label for="memo">메모:</label>
+  <textarea id="memo" name="memo" rows="4"></textarea>
+  <label for="startDate">시작일:</label>
+  <input type="date" id="startDate" name="startDate" required>
+  <label for="endDate">종료일:</label>
+  <input type="date" id="endDate" name="endDate" required>
+  <label for="startTime">시작시간:</label>
+  <input type="time" id="startTime" name="startTime">
+  <label for="endTime">종료시간:</label>
+  <input type="time" id="endTime" name="endTime">
+  <label for="importance">중요도:</label>
+  <select id="importance" name="importance">
+    <option value="low">낮음</option>
+    <option value="medium">보통</option>
+    <option value="high">높음</option>
+  </select>
+  <button type="submit">일정 추가</button>
+</form>
+</body>
+</html>
