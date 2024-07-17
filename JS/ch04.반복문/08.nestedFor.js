@@ -26,9 +26,9 @@ for (let i = 0; i < 5; i++) {
 }
 
 // 4. 다이아몬드 4사분면
-for (let i = 5; i >= 1; i--) {          // i는 5에서 1까지
+for (let i = 5; i >= 1; i--) {          // i는 5에서 1까지 1씩 줄어들음 >는 커지는 방향으로 설정 -
     let line = '';
-    for (let k = 0; k < i; k++)
+    for (let k = 0; k < i; k++)         // ++, -- 뜻 그대로 커지고 작아지는 것
         line += '* '
     console.log(line);
 }
@@ -43,3 +43,4 @@ for (let i = 0; i < 6; i++) {
     diceArray.push(line);
 }
 console.log(diceArray);
+
