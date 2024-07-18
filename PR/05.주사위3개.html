@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주사위 상금 찾기</title>
+    <style>
+        input, button {padding: 10px;}
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h3>주사위 상금 찾기</h3>
+    <input type="text" style="width: 250px" id="diceInput" placeholder="주사위 숫자 세 개를 입력하세요. (예: 1,2,3)">
+    <button onclick="calculateDice()">확인</button>
+    <hr>
+    <div id="result"></div>
+    
+    <script>
+        function calculateDice() {
+            let diceInput = document.getElementById('diceInput').value;
+            let [dice1, dice2, dice3] = diceInput.split(',');
+
+            dice1 = parseInt(dice1.trim());
+            dice2 = parseInt(dice2.trim());
+            dice3 = parseInt(dice3.trim());
+
+            let prize = 0;
+
+            if (dice1 == dice2 && dice2 == dice3) {
+                prize = 10000 + 1000 * dice1;
+            } else if (dice1 == dice2 || dice1 == dice3 || dice2 == dice3) {
+                if (dice1 == dice2 || dice1 == dice3) {
+                    prize = 1000 + 100 * dice1;
+                } else {
+                    prize = 1000 + 100 * dice2;
+                }
+            } else {
+                let maxDice = Math.max(dice1, dice2, dice3);
+                prize = 100 * maxDice;
+            }
+
+            document.getElementById('result').innerText = '총 상금은 ' + prize + '원 입니다.';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사분면</title>
+    <style>
+        input, button {padding: 10px;}
+    </style>
+</head>
+<body style="margin: 40px;">
+    <h3>사분면 계산</h3>
+    <hr>
+    <input type="text" style="width: 250px;" id="calculateQ" placeholder="x축과 y축을 입력하세요.">
+    <button onclick="calculateQ()">확인</button>
+    <hr>
+    <div id="result"></div>
+    <script>
+        function isQ([x,y]){
+            let quadrant = '';
+            if (x > 0 && y > 0)
+                return quadrant = '1사분면';
+                else if (x < 0 && y > 0)
+                    return quadrant = '2사분면';
+                else if (x < 0 && y < 0)
+                    return quadrant = '3사분면';
+                else if (x > 0 && y < 0)
+                    return quadrant = '4사분면';
+                else
+                    return quadrant = '좌표축';
+        }
+        function calculateQ() {
+            let Q = document.getElementById('calculateQ').value;
+            let [x, y] = Q.split(',');
+            let result = isQ([x,y]);
+            document.getElementById('result').innerHTML = '제' + result + '입니다.';
+
+        }
+            
+            
+        
+    </script>
+</body>
+</html>
