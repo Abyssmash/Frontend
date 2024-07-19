@@ -28,7 +28,7 @@
             let age= today.getFullYear() - birthYear;
             let m = today.getMonth() - birthMonth;
             if (m < 0 || (m === 0 && today.getDate() < birthDay)) {
-              age--;
+            age--;
             }
             document.getElementById('result').innerText = '나이는' + age + '세 입니다.';
         }   
