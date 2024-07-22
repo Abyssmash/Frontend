@@ -13,7 +13,7 @@
         }
         function displayTime(num) {
             let minute = parseInt(num/600);
-            let second = parseInt(num/10) % 60; 
+            let second = parseInt(num/10) % 60; //100*10은 1000 즉 컴퓨터 속도로 1초
             return twoDigit(minute) + ':' + twoDigit(second) + '.' + num%10;    //num을 10으로 나눈 나머지 라는 의미
         }
         window.onload = () => {
