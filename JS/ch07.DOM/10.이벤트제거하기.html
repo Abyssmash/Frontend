@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=`, initial-scale=1.0">
     <title>이벤트 제거</title>
+    <style>
+        h1 { user-select: none; }   /* 클릭을 여러번 했을때 글자가 선택되는 것을 방지 */
+    </style>
     <script>
         window.onload = () => {
             let counter = 0;
@@ -15,8 +18,24 @@
             const disconnectButton = document.querySelector('#disconnect');
 
             const listener = (event) => {
-                h1.innerText = `클릭 횟수: ${counter++}`;
+                h1.innerText = `클릭 횟수: ${++counter}`;
             }
+
+            connectButton.addEventListener('click', () => {             //콜백 함수
+                if (isConnected == false) {
+                    h1.addEventListener('click', listener);
+                    p.innerText = '이벤트 연결 상태: 연결';
+                    isConnected = true;
+                }
+            });
+
+            disconnectButton.addEventListener('click', () => {
+                if (isConnected == true) {
+                    h1.removeEventListener('click', listener);
+                    p.innerText = '이벤트 연결 상태: 해제';
+                    isConnected = false;
+                }
+            })
         }
     </script>
 </head>

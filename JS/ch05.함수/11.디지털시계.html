@@ -11,7 +11,7 @@
         function twoDigit(num) {
             return num < 10 ? '0' + num : String(num);      // 4 --> '04', 15 --> '15'
         }
-        function myClock() {
+        function myClock() {screen
             let date = new Date();
             return `${twoDigit(date.getHours())}:${twoDigit(date.getMinutes())}:${twoDigit(date.getSeconds())}`;
         }
