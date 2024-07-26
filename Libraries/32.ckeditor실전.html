@@ -14,13 +14,6 @@
         * { font-family: 'Noto Sans KR', sans-serif; }
         a { text-decoration: none; color: inherit; }
     </style>
-    <script>
-        window.onload = () => {
-            CKEDITOR.replace('content', {
-                height: 500
-            })
-        }
-    </script>
 </head>
 <body>
     <div class="container-fluid p-4 bg-success text-white text-center fixed-top">
@@ -40,5 +33,12 @@
             <div class="col-2"></div>
         </div>
     </div>
+    <script>
+        CKEDITOR.replace('content', {
+        filebrowserImageUploadUrl: '/abbs/file/imageUpload',        // 이미지를 업로드 하기 위한 주소
+        filebrowserUploadMethod: 'form',            // form 형식으로 image를 업로드
+        height: 500, width: '100%'
+        });
+    </script>
 </body>
 </html>
