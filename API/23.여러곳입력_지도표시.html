@@ -5,70 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>여러곳 입력받아 지도에 표시하기</title>
     <style>
-        input, button { padding: 5px; margin-right: 10px; }
+        input, button { padding: 5px; margin-right: 5px; }
     </style>
     <script src="key.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        window.onload = () => {
-            const kakaoScript = document.createElement('script');
-            kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
-            kakaoScript.onload = () => {
-                kakao.maps.load(async () => { 
-                    let coords = [];
-                    let sumLat = 0.0, sumLon = 0.0;
-                    let ul = document.getElementById('list');
-                    for (let place of places) {
-                        const coord = await getCoord(place);
-                        coords.push(coord);
-                        sumLat += coord.lat; sumLon += coord.lon;   // 지도의 중심: 위도와 경도의 평균 구하기
-                        let li = document.createElement('li');
-                        let text = `${place}: ${coord.roadAddr}, 위도: ${coord.lat.toFixed(6)}, 경도: ${coord.lon.toFixed(6)}`;
-                        li.innerHTML = text;
-                        ul.appendChild(li);
-                    }
-                    drawMaps(coords, sumLat/coords.length, sumLon/coords.length);
-                });
-            };
-            document.head.appendChild(kakaoScript);
-        }
-        function handleMap() {
-            const place = document.getElementById('input').value;
-            const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
-            const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
-            const params1 = 'currentPage=1&countPerPage=5';
-            const params2 = `keyword=${encodeURIComponent(place)}`;
-            const params3 = `confmKey=${roadAddrKey}&resultType=json`;
-            const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
-            
-            document.getElementById('place').innerHTML = place;
-            fetch(roadUrl)
-                .then(response => response.json())
-                .then(result => {
-                    // console.log(result);
-                    let roadAddr = result.results.juso[0].roadAddr;
-                    document.getElementById('roadAddr').innerHTML = roadAddr;
-                
-                    let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
-                    let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
-                    fetch(kakaoUrl, { headers: header })
-                        .then(response => response.json())
-                        .then(result => {
-                            // console.log(result);
-                            let lat = parseFloat(result.documents[0].y);
-                            let lon = parseFloat(result.documents[0].x);
-                            document.getElementById('lat').innerHTML = '' + lat;
-                            document.getElementById('lon').innerHTML = String(lon);
+        const roadBaseUrl = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
+        const kakaoBaseUrl = 'https://dapi.kakao.com/v2/local/search/address.json';
+        const params1 = 'currentPage=1&countPerPage=5';
+        const params3 = `confmKey=${roadAddrKey}&resultType=json`;
+        const header = { Authorization: `KakaoAK ${kakaoRestKey}` };
 
-                            drawMap(place, lat, lon);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        }); 
-                });
+        const kakaoScript = document.createElement('script');
+        kakaoScript.src = `http://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJsKey}&autoload=false`;
+        kakaoScript.onload = () => {
+            kakao.maps.load(() => { });
+        };
+        document.head.appendChild(kakaoScript);
+
+        async function handleMaps() {       // 검색은 반복문
+            let places = [];
+            for (let i = 1; i <= 5; i++)
+                places.push($(`#input${i}`).val());
+
+            let coords = [];
+            let sumLat = 0.0, sumLon = 0.0;
+            for (let place of places) {
+                const coord = await getCoord(place);
+                coords.push(coord);
+                sumLat += coord.lat; sumLon += coord.lon;
+                let text = `${place}: ${coord.roadAddr}, 위도: ${coord.lat.toFixed(6)}, 경도: ${coord.lon.toFixed(6)}`;
+                $('<li></li>')
+                    .html(text)
+                    .appendTo($('#list'));
+            }
+            drawMaps(coords, sumLat/coords.length, sumLon/coords.length);
         }
+
         async function getCoord(place) {
             try {
-            
                 const params2 = `keyword=${encodeURIComponent(place)}`;
                 const roadUrl = `${roadBaseUrl}?${params1}&${params2}&${params3}`;
 
@@ -76,10 +51,8 @@
                 let result = await response.json();
                 let roadAddr = result.results.juso[0].roadAddr;
 
-                
                 let kakaoUrl = `${kakaoBaseUrl}?query=${encodeURIComponent(roadAddr)}`;
-                let header = { Authorization: `KakaoAK ${kakaoRestKey}` };   
-                response = await fetch(kakaoUrl, {headers: header});
+                response = await fetch(kakaoUrl, { headers: header });
                 result = await response.json();
                 let lat = parseFloat(result.documents[0].y);
                 let lon = parseFloat(result.documents[0].x);
@@ -90,10 +63,10 @@
             }
         }
 
-        function drawMaps(coords, centerLat, centerLon) {  // 여러개 표시하려면 
+        function drawMaps(coords, centerLat, centerLon) {
             let container = document.getElementById('map');
             let center = new kakao.maps.LatLng(centerLat, centerLon);
-            let map = new kakao.maps.Map(container, {center, level: 7}); 
+            let map = new kakao.maps.Map(container, { center, level: 7 }); 
 
             for (let coord of coords) {
                 let marker = new kakao.maps.Marker({
@@ -101,7 +74,8 @@
                     position: new kakao.maps.LatLng(coord.lat, coord.lon)
                 });
                 let infowindow = new kakao.maps.InfoWindow({
-                    content : `<div style="padding:5px;">${coord.place}<br>${coord.roadAddr}</div>`});
+                    content : `<div style="padding:5px;">${coord.place}<br>${coord.roadAddr}</div>`
+                });
                 kakao.maps.event.addListener(marker, 'mouseover', () => {
                     infowindow.open(map, marker);
                 });
@@ -124,6 +98,6 @@
     <hr>
     <ul id="list">
     </ul>
-    <div id="map" style="width:800px; height:600px; margin-top: 20px;"></div> 
+    <div id="map" style="width:800px; height:600px; margin-top: 20px;"></div>
 </body>
 </html>
